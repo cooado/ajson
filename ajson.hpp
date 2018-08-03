@@ -938,7 +938,7 @@ namespace ajson
 #undef Z16
       };
 
-      s_.putc('"');
+      s_.put('"');
       char const * ptr = str;
       char const * end = ptr + len;
       while (ptr < end)
@@ -976,15 +976,15 @@ namespace ajson
         }
         else
         {
-          s_.putc(c);
+          s_.put(c);
         }
       }
-      s_.putc('"');
+      s_.put('"');
     }
 
     inline void putc(char c)
     {
-      s_.putc(c);
+      s_.put(c);
     }
   };
 
