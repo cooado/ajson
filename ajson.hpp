@@ -84,7 +84,7 @@ namespace ajson
     {
       if (c > ' ')
         return false;
-      return char_table()[c] == 17;
+      return char_table()[(uint)c] == 17;
     }
 
     inline char const * skip_ws(char const * str)
@@ -206,10 +206,10 @@ namespace ajson
     token   cur_tok_;
     size_t  cur_col_ = 0;
     size_t  cur_line_ = 0;
+    const char  * ptr_ = nullptr;
     size_t  len_ = 0;
     size_t  cur_offset_ = 0;
     bool    end_mark_ = false;
-    const char  * ptr_ = nullptr;
     double decimal = 0.1;
     int    exp = 0;
     inline void decimal_reset(){ decimal = 0.1; }
@@ -294,7 +294,7 @@ namespace ajson
       cur_tok_.str.str = ptr_ + cur_offset_;
       take();
       auto c = read();
-      size_t esc_count = 0;
+//      size_t esc_count = 0;
       do
       {
         switch (c)
@@ -1321,7 +1321,7 @@ namespace ajson
   {
     if (v <= 'f')
     {
-      v = detail::char_table()[v];
+      v = detail::char_table()[(uint)v];
     }
     else
     {
@@ -1513,7 +1513,7 @@ namespace ajson
       {
         rd.error("not a valid string.");
       }
-      size_t len = str.length();
+      int len = str.length();
       if (len > N)
         len = N;
       std::memcpy(val, str.data(), len);
